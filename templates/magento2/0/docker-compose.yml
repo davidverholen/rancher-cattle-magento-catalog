@@ -8,10 +8,10 @@ apache:
   environment:
     - VIRTUAL_HOST=${vhost}
 
-debian:
-  image: debian
-  ports:
-    - "${ssh_port}:22"
+webdav:
+  image: visity/webdav
+  environment:
+    - VIRTUAL_HOST=webdav.${vhost}
 
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
