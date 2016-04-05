@@ -1,0 +1,13 @@
+owncloud:
+  image: php:7-apache
+  ports:
+   - "80:80"
+  links:
+    - db
+  environment:
+    - VIRTUAL_HOST=${vhost}
+
+db:
+  image: mariadb
+  environment:
+    - MYSQL_ROOT_PASSWORD=${mysql_password}
