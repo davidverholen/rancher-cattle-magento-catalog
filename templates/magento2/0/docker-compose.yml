@@ -10,7 +10,13 @@ apache:
   volumes:
     - /var/www/html
   labels:
-    io.rancher.sidekicks: ssh
+    io.rancher.sidekicks: ssh,apache-data
+
+apache-data:
+  image: busybox
+  volumes_from:
+    - apache
+  command: ["echo", "${io.rancher.stack_service.name} Data Container"]
 
 ssh:
   image: ssh
