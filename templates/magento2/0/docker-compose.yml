@@ -13,7 +13,7 @@ apache:
     io.rancher.sidekicks: ssh,apache-data
 
 apache-data:
-  image: busybox
+  image: busybox:1.24
   volumes_from:
     - apache
   command: ["echo", "apache data container"]
