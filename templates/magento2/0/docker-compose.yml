@@ -2,37 +2,31 @@ apache:
   image: magento2
   links:
     - db
-    - redis-backend-cache
-    - redis-page-cache
-    - memcached-session
+    - redis01
+    - redis02
+    - memcached
   environment:
     - VIRTUAL_HOST=${vhost}
   volumes:
     - /var/www/html
-
 webdav:
   image: visity/webdav
   volumes_from:
     - apache:rw
   environment:
     - VIRTUAL_HOST=webdav.${vhost}
-
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
   links:
     - db
   environment:
     - VIRTUAL_HOST=phpmyadmin.${vhost}
-
-redis-backend-cache:
+redis01:
   image: redis
-
-redis-page-cache:
+redis02:
   image: redis
-
-memcached-session:
+memcached:
   image: memcached
-
 db:
   image: mariadb
   environment:
