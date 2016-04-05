@@ -1,5 +1,5 @@
-owncloud:
-  image: php:7-apache
+apache:
+  image: php:7.0-apache
   ports:
    - "80:80"
   links:
