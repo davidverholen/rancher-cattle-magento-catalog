@@ -2,6 +2,9 @@ apache:
   image: magento2
   links:
     - db
+    - redis-backend-cache
+    - redis-page-cache
+    - memcached-session
   environment:
     - VIRTUAL_HOST=${vhost}
 
@@ -9,9 +12,6 @@ phpmyadmin:
   image: phpmyadmin/phpmyadmin
   links:
     - db
-    - redis-backend-cache
-    - redis-page-cache
-    - memcached-session
   environment:
     - VIRTUAL_HOST=phpmyadmin.${vhost}
 
