@@ -1,14 +1,7 @@
 apache:
   image: magento2
-  links:
-    - db
-    - redis01
-    - redis02
-    - memcached
   environment:
     - VIRTUAL_HOST=${vhost}
-  volumes:
-    - /var/www/html
   labels:
     io.rancher.sidekicks: webdav
 
@@ -18,25 +11,3 @@ webdav:
     - apache:rw
   environment:
     - VIRTUAL_HOST=webdav.${vhost}
-
-phpmyadmin:
-  image: phpmyadmin/phpmyadmin
-  links:
-    - db
-  environment:
-    - VIRTUAL_HOST=phpmyadmin.${vhost}
-
-redis01:
-  image: redis
-
-redis02:
-  image: redis
-
-memcached:
-  image: memcached
-
-db:
-  image: mariadb
-  environment:
-    - MYSQL_ALLOW_EMPTY_PASSWORD=true
-    - MYSQL_DATABASE=magento
