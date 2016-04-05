@@ -11,3 +11,9 @@
       required: true
       default: "developer-customer.docker1.brandung.dev"
       type: "string"
+    - variable: "ssh_port"
+      description: "SSH Port"
+      label: "SSH Port:"
+      required: true
+      default: "2222"
+      type: "string"
