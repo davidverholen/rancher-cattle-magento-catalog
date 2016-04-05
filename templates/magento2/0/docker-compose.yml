@@ -8,6 +8,14 @@ apache:
   environment:
     - VIRTUAL_HOST=${vhost}
 
+debian:
+  image: debian
+  ports:
+    - 22
+  environment:
+    - VIRTUAL_HOST=${vhost}
+    - VIRTUAL_PORT=22
+
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
   links:
