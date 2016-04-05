@@ -11,7 +11,7 @@ apache:
 webdav:
   image: visity/webdav
   volumes_from:
-    - apache
+    - apache:rw
   environment:
     - VIRTUAL_HOST=webdav.${vhost}
 
