@@ -11,9 +11,3 @@
       required: true
       default: "developer-customer.docker1.brandung.dev"
       type: "string"
-    - variable: "mysql_password"
-      description: "Mysql Password"
-      label: "Mysql Password:"
-      required: true
-      default: "password123"
-      type: "string"
