@@ -9,26 +9,32 @@ apache:
     - VIRTUAL_HOST=${vhost}
   volumes:
     - /var/www/html
+  labels:
+    io.rancher.sidekicks: webdav
+
 webdav:
   image: visity/webdav
   volumes_from:
     - apache:rw
   environment:
     - VIRTUAL_HOST=webdav.${vhost}
-  labels:
-      io.rancher.sidekicks: apache
+
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
   links:
     - db
   environment:
     - VIRTUAL_HOST=phpmyadmin.${vhost}
+
 redis01:
   image: redis
+
 redis02:
   image: redis
+
 memcached:
   image: memcached
+
 db:
   image: mariadb
   environment:
