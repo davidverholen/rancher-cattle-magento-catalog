@@ -4,12 +4,26 @@ apache:
     - db
   environment:
     - VIRTUAL_HOST=${vhost}
+
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
   links:
     - db
+    - redis-backend-cache
+    - redis-page-cache
+    - memcached-session
   environment:
     - VIRTUAL_HOST=phpmyadmin.${vhost}
+
+redis-backend-cache:
+  image: redis
+
+redis-page-cache:
+  image: redis
+
+memcached-session:
+  image: memcached
+
 db:
   image: mariadb
   environment:
