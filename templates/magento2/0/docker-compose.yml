@@ -13,7 +13,7 @@ debian:
   ports:
     - 22
   environment:
-    - VIRTUAL_HOST=${vhost}
+    - VIRTUAL_HOST=ssh.${vhost}
     - VIRTUAL_PORT=22
 
 phpmyadmin:
