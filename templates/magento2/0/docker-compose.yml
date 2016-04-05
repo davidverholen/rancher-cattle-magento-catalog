@@ -7,6 +7,8 @@ apache:
     - memcached-session
   environment:
     - VIRTUAL_HOST=${vhost}
+  volumes:
+    - /var/www/html
 
 webdav:
   image: visity/webdav
