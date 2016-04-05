@@ -48,3 +48,13 @@ db:
   environment:
     - MYSQL_ALLOW_EMPTY_PASSWORD=true
     - MYSQL_DATABASE=magento
+  labels:
+    io.rancher.sidekicks: db-data
+
+db-data:
+  image: busybox:1.24
+  volumes_from:
+    - db
+  command: ["echo", "db data container"]
+  labels:
+    io.rancher.container.start_once: true
