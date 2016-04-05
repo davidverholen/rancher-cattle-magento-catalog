@@ -2,8 +2,12 @@ apache:
   image: magento2
   environment:
     - VIRTUAL_HOST=${vhost}
+  labels:
+    io.rancher.sidekicks: webdav
 
 webdav:
   image: visity/webdav
+  volumes_from:
+    - apache:rw
   environment:
     - VIRTUAL_HOST=webdav.${vhost}
