@@ -11,10 +11,7 @@ apache:
 debian:
   image: debian
   ports:
-    - 22
-  environment:
-    - VIRTUAL_HOST=ssh.${vhost}
-    - VIRTUAL_PORT=22
+    - "${ssh_port}:22"
 
 phpmyadmin:
   image: phpmyadmin/phpmyadmin
