@@ -16,7 +16,9 @@ apache-data:
   image: busybox
   volumes_from:
     - apache
-  command: ["echo", "${io.rancher.stack_service.name} Data Container"]
+  command: ["echo", "apache data container"]
+  labels:
+    io.rancher.container.start_once: true
 
 ssh:
   image: ssh
