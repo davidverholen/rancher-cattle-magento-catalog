@@ -1,11 +1,9 @@
 app:
-  image: baselibrary/nexus:latest
+  image: baselibrary/nexus:3.0
   environment:
     - VIRTUAL_HOST=${vhost}
-    - VIRTUAL_PORT=8081
   labels:
     io.rancher.sidekicks: app-data
-
 
 app-data:
   image: busybox:1.24
