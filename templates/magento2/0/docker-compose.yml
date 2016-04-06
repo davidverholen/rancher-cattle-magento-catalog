@@ -1,5 +1,5 @@
 apache:
-  image: magento2
+  image: nexus.docker1.brandung.dev:5000/magento2
   links:
     - db
     - redis01
@@ -21,7 +21,7 @@ apache-data:
     io.rancher.container.start_once: true
 
 ssh:
-  image: ssh
+  image: nexus.docker1.brandung.dev:5000/ssh
   volumes_from:
     - apache
   ports:
