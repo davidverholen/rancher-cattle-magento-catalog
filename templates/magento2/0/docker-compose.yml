@@ -1,68 +1,60 @@
-app:
-  image: mageinferno/magento2-nginx:1.9
+apache:
+  image: nexus.docker1.brandung.dev:5000/magento2
   links:
-    - php-fpm
     - db
-  volumes_from:
-    - appdata
+    - redis01
+    - redis02
+    - memcached
   environment:
-    - APP_MAGE_MODE=default
     - VIRTUAL_HOST=${vhost}
-  labels:
-    io.rancher.sidekicks: appdata,setup
-
-appdata:
-  image: tianon/true
   volumes:
-    - /src
-    - ~/.composer:/root/.composer
+    - /var/www/html
+  labels:
+    io.rancher.sidekicks: ssh,apache-data
 
-php-fpm:
-  image: mageinferno/magento2-php:7.0-fpm
+apache-data:
+  image: busybox:1.24
+  volumes_from:
+    - apache
+  command: ["echo", "apache data container"]
+  labels:
+    io.rancher.container.start_once: true
+
+ssh:
+  image: nexus.docker1.brandung.dev:5000/ssh
+  volumes_from:
+    - apache
+  ports:
+    - "${ssh_port}:22"
+
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin
   links:
     - db
-  volumes_from:
-    - appdata
   environment:
-    - APP_MAGE_MODE=developer
-    - PHP_MEMORY_LIMIT=2048M
+    - VIRTUAL_HOST=phpmyadmin.${vhost}
+
+redis01:
+  image: redis
+
+redis02:
+  image: redis
+
+memcached:
+  image: memcached
 
 db:
-  image: mariadb:10.1
-  ports:
-    - "3306:3306"
-  volumes_from:
-    - dbdata
+  image: mariadb
   environment:
-    - MYSQL_ROOT_PASSWORD=magento2
-    - MYSQL_DATABASE=magento2
-    - MYSQL_USER=magento2
-    - MYSQL_PASSWORD=magento2
+    - MYSQL_ALLOW_EMPTY_PASSWORD=true
+    - MYSQL_DATABASE=magento
   labels:
-    io.rancher.sidekicks: dbdata
+    io.rancher.sidekicks: db-data
 
-dbdata:
-  image: tianon/true
-  volumes:
-    - /var/lib/mysql
-
-setup:
-  image: mageinferno/magento2-php:7.0-fpm
-  command: /usr/local/bin/mage-setup
-  links:
-    - db
+db-data:
+  image: busybox:1.24
   volumes_from:
-    - appdata
-  environment:
-    - M2SETUP_DB_HOST=db
-    - M2SETUP_DB_NAME=magento2
-    - M2SETUP_DB_USER=magento2
-    - M2SETUP_DB_PASSWORD=magento2
-    - M2SETUP_BASE_URL=http://${vhost}
-    - M2SETUP_ADMIN_FIRSTNAME=Admin
-    - M2SETUP_ADMIN_LASTNAME=Brandung
-    - M2SETUP_ADMIN_EMAIL=magento-system@brandung.de
-    - M2SETUP_ADMIN_USER=adin[brandung]
-    - M2SETUP_ADMIN_PASSWORD=bran:dung1
-    - M2SETUP_VERSION=2.0.4
-    - M2SETUP_USE_SAMPLE_DATA=true
+    - db
+  command: ["echo", "db data container"]
+  labels:
+    io.rancher.container.start_once: true
