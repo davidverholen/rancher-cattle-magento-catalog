@@ -22,7 +22,7 @@ sftp:
   volumes_from:
     - app
   ports:
-    - "${ssh_port}:22"
+    - ":22"
 
 dbadmin:
   image: phpmyadmin/phpmyadmin
