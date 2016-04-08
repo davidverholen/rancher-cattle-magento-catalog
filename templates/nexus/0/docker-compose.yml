@@ -6,7 +6,7 @@ app:
   labels:
     io.rancher.sidekicks: app-data
   ports:
-    - "5000:5000"
+    - ":5000-5100"
 
 app-data:
   image: busybox:1.24

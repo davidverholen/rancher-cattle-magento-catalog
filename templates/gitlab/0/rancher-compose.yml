@@ -11,9 +11,3 @@
       required: true
       default: "gitlab.docker1.brandung.dev"
       type: "string"
-    - variable: "ssh_port"
-      description: "SSH Port"
-      label: "SSH Port:"
-      required: true
-      default: "9999"
-      type: "string"
