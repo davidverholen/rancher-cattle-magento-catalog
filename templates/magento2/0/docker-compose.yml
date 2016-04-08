@@ -8,7 +8,7 @@ app:
   environment:
     - VIRTUAL_HOST=${vhost}
   labels:
-    io.rancher.sidekicks: appdata,webdav
+    io.rancher.sidekicks: sftp,appdata
 
 appdata:
   image: tianon/true
@@ -17,12 +17,12 @@ appdata:
   labels:
     io.rancher.container.start_once: true
 
-webdav:
-  image: visity/webdav
+sftp:
+  image: nexus.docker1.brandung.dev:5000/sftp:latest
   volumes_from:
     - app
-  environment:
-    - VIRTUAL_HOST=webdav.${vhost}
+  ports:
+    - "${ssh_port}:22"
 
 dbadmin:
   image: phpmyadmin/phpmyadmin
