@@ -8,14 +8,21 @@ app:
   environment:
     - VIRTUAL_HOST=${vhost}
   labels:
-    io.rancher.sidekicks: ssh,appdata
+    io.rancher.sidekicks: ssh,appdata,webdav
 
 appdata:
   image: tianon/true
   volumes_from:
-    - apache
+    - app
   labels:
     io.rancher.container.start_once: true
+
+webdav:
+  image: visity/webdav
+  volumes_from:
+    - app
+  environment:
+    - VIRTUAL_HOST=webdav.${vhost}
 
 dbadmin:
   image: phpmyadmin/phpmyadmin
