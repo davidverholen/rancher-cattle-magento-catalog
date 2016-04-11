@@ -8,7 +8,7 @@ app:
   environment:
     - VIRTUAL_HOST=${vhost}
   labels:
-    io.rancher.sidekicks: sftp,appdata,composer
+    io.rancher.sidekicks: ssh,appdata
 
 appdata:
   image: tianon/true
@@ -17,7 +17,7 @@ appdata:
   labels:
     io.rancher.container.start_once: true
 
-sftp:
+ssh:
   image: nexus.docker1.brandung.dev:5000/ssh:latest
   volumes_from:
     - app
