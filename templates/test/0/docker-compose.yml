@@ -9,11 +9,6 @@ app:
     - VIRTUAL_HOST=${vhost}
   labels:
     io.rancher.sidekicks: ssh,appdata
-  volumes:
-    - app.ect.${vhost}:/var/www/html/app/etc
-    - var.${vhost}:/var/www/html/var
-    - pub.media.${vhost}:/var/www/html/pub/media
-    - pub.static.${vhost}:/var/www/html/pub/static
 
 appdata:
   image: tianon/true
@@ -52,8 +47,6 @@ db:
     - MYSQL_DATABASE=magento
   labels:
     io.rancher.sidekicks: dbdata
-  volumes:
-    - db.${vhost}:/var/lib/mysql
 
 dbdata:
   image: tianon/true
