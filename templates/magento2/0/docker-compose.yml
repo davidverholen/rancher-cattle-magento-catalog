@@ -9,6 +9,7 @@ app:
     - redis01
     - redis02
     - memcached
+    - logstash
   environment:
     - VIRTUAL_HOST=${vhost}
   labels:
@@ -93,22 +94,3 @@ grafana:
     - INFLUXDB_NAME=cadvisor
     - INFLUXDB_USER=root
     - INFLUXDB_PASS=root
-
-###########
-# LOGGING #
-###########
-
-elasticsearch:
-  image: elasticsearch:2
-
-logstash:
-  build: ./logstash
-  links:
-    - elasticsearch
-
-kibana:
-  image: kibana:4
-  environment:
-    - VIRTUAL_HOST=logs.${vhost}
-  links:
-    - elasticsearch
