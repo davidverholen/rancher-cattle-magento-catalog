@@ -19,7 +19,7 @@
       type: "string"
     - variable: "Password"
       description: "Password"
-      label: "Virtual Host:"
+      label: "Password:"
       required: true
       default: "password123"
       type: "password"
