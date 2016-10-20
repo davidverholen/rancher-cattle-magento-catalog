@@ -23,7 +23,7 @@ ssh:
   volumes_from:
     - app
   ports:
-    - ":22"
+    - "${port}:22"
 
 ########
 # DATA #
