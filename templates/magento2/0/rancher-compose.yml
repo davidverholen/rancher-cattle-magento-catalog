@@ -23,3 +23,9 @@
       required: true
       default: "password123"
       type: "password"
+    - variable: "port"
+      description: "SSH Port"
+      label: "Port:"
+      required: true
+      default: "22"
+      type: "int"
